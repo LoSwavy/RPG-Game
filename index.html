@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tower Defense</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="game-wrap">
+    <!-- HUD -->
+    <div id="hud">
+      <div class="hud-item" id="hud-hp">HP: <span id="hp-val">100</span> / <span id="hp-max">100</span></div>
+      <div class="hud-item" id="hud-points">Points: <span id="points-val">0</span></div>
+      <button id="shop-btn">Shop [B]</button>
+    </div>
+
+    <canvas id="game" width="800" height="600"></canvas>
+
+    <!-- Buy Menu -->
+    <div id="shop" class="hidden">
+      <div id="shop-panel">
+        <h2>Shop</h2>
+        <p class="shop-sub">Points: <span id="shop-points">0</span></p>
+
+        <div class="upgrade" id="upg-firerate">
+          <div class="upgrade-info">
+            <span class="upgrade-name">Fire Rate</span>
+            <span class="upgrade-lvl">Lv <span id="firerate-lvl">0</span></span>
+          </div>
+          <button class="buy-btn" id="buy-firerate">Buy (<span id="firerate-cost">5</span>)</button>
+        </div>
+
+        <div class="upgrade" id="upg-hp">
+          <div class="upgrade-info">
+            <span class="upgrade-name">Max HP</span>
+            <span class="upgrade-lvl">Lv <span id="hp-lvl">0</span></span>
+          </div>
+          <button class="buy-btn" id="buy-hp">Buy (<span id="hp-cost">5</span>)</button>
+        </div>
+
+        <button id="close-shop">Close [B]</button>
+      </div>
+    </div>
+
+    <!-- Game Over -->
+    <div id="gameover" class="hidden">
+      <div id="gameover-panel">
+        <h2>You Died</h2>
+        <p>Points earned: <span id="final-points">0</span></p>
+        <button id="restart-btn">Restart</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
