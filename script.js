@@ -458,23 +458,28 @@ function damageEnemy(e, dmg, index) {
 }
 
 function killEnemy(e, index) {
+  if (e.dead) return; // guard: chained explosions can re-enter on the same enemy
+  e.dead = true;
+
   const def = enemyDef(e);
   addPoints(def.points);
   if (owned('vampire')) player.hp = Math.min(player.hp + 2, player.maxHp);
+
+  // remove from the array BEFORE exploding so chains never see this enemy
+  let idx = (index !== undefined && enemies[index] === e) ? index : enemies.indexOf(e);
+  if (idx >= 0) enemies.splice(idx, 1);
+
   if (owned('volatile')) {
     effects.push({ kind: 'explosion', x: e.x, y: e.y, t: 0.3 });
     for (let j = enemies.length - 1; j >= 0; j--) {
       const other = enemies[j];
-      if (other === e) continue;
+      if (!other || other.dead) continue; // nested chains may have shrunk the array
       if (Math.hypot(other.x - e.x, other.y - e.y) < 60) {
         other.hp -= 1;
-        if (other.hp <= 0) killEnemy(other, j);
+        if (other.hp <= 0) killEnemy(other);
       }
     }
   }
-  // chained kills (volatile) can shift the array, so verify the index
-  let idx = (index !== undefined && enemies[index] === e) ? index : enemies.indexOf(e);
-  if (idx >= 0) enemies.splice(idx, 1);
   trySpawnDrop();
   updateHUD();
 }
