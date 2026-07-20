@@ -12,33 +12,22 @@
     <div id="hud">
       <div class="hud-item" id="hud-hp">HP: <span id="hp-val">100</span> / <span id="hp-max">100</span></div>
       <div class="hud-item" id="hud-points">Points: <span id="points-val">0</span></div>
+      <div class="hud-item" id="hud-effects"></div>
       <button id="shop-btn">Shop [B]</button>
     </div>
 
     <canvas id="game" width="800" height="600"></canvas>
 
-    <!-- Buy Menu -->
+    <!-- Buy Menu (content injected by script.js) -->
     <div id="shop" class="hidden">
       <div id="shop-panel">
         <h2>Shop</h2>
         <p class="shop-sub">Points: <span id="shop-points">0</span></p>
-
-        <div class="upgrade" id="upg-firerate">
-          <div class="upgrade-info">
-            <span class="upgrade-name">Fire Rate</span>
-            <span class="upgrade-lvl">Lv <span id="firerate-lvl">0</span></span>
-          </div>
-          <button class="buy-btn" id="buy-firerate">Buy (<span id="firerate-cost">5</span>)</button>
+        <div id="shop-tabs">
+          <button class="tab-btn active" data-tab="stats">Stats</button>
+          <button class="tab-btn" data-tab="abilities">Abilities</button>
         </div>
-
-        <div class="upgrade" id="upg-hp">
-          <div class="upgrade-info">
-            <span class="upgrade-name">Max HP</span>
-            <span class="upgrade-lvl">Lv <span id="hp-lvl">0</span></span>
-          </div>
-          <button class="buy-btn" id="buy-hp">Buy (<span id="hp-cost">5</span>)</button>
-        </div>
-
+        <div id="shop-list"></div>
         <button id="close-shop">Close [B]</button>
       </div>
     </div>
